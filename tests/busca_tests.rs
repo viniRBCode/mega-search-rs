@@ -1,6 +1,7 @@
 #[cfg(test)]
 mod testes {
-    use mega_search_rs::produto::{Produto, CatalogoProdutos};
+    use mega_search_rs::produto::Produto;
+    use mega_search_rs::busca::CatalogoProdutos; // Corrigida a importação
 
     #[test]
     fn teste_busca_produto() {
