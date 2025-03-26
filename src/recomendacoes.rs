@@ -55,8 +55,7 @@ impl GrafoProdutos {
     pub fn sincronizar_relacionados(&self, catalogo: &mut CatalogoProdutos) {
         for (produto_id, relacionados) in &self.conexoes {
             if let Some(produto) = catalogo.iterar_produtos_mut().find(|p| p.id == *produto_id) {
-                produto.relacionados.clear();
-                produto.relacionados.extend(relacionados.iter().cloned());
+                produto.relacionados = relacionados.clone(); // Atualiza corretamente o campo relacionados
             }
         }
     }

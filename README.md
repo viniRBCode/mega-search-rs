@@ -6,6 +6,7 @@ Bem-vindo ao sistema de busca e recomendação da MegaStore! Este projeto foi de
 
 - **Busca por produtos**: Permite encontrar produtos pelo nome ou pela categoria.
 - **Recomendações de produtos**: Sugere produtos relacionados com base nas conexões criadas no sistema.
+- **Exibição de nomes relacionados**: Ao buscar um produto, o sistema exibe os nomes dos produtos relacionados, tornando as recomendações mais intuitivas.
 
 ## Primeira Versão
 

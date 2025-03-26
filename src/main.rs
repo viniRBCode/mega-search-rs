@@ -21,18 +21,22 @@ fn main() {
     grafo.adicionar_produto(produto1.clone());
     grafo.adicionar_produto(produto2.clone());
 
-    // Realiza uma busca no catálogo pelo nome do produto
-    println!("🔍 Buscando 'Laptop'...");
-    match catalogo.buscar("Laptop") {
-        Some(produtos) => println!("Produto encontrado: {:?}", produtos),
-        None => println!("Produto não encontrado"),
-    }
-
     // Cria uma relação entre dois produtos no grafo
     grafo.adicionar_relacao("101", "102");
 
     // Sincroniza os produtos relacionados no catálogo com base no grafo
     grafo.sincronizar_relacionados(&mut catalogo);
+
+    // Realiza uma busca no catálogo pelo nome do produto
+    println!("🔍 Buscando 'Laptop'...");
+    match catalogo.buscar("Laptop") {
+        Some(produtos) => {
+            if let Some(produto) = produtos.first() {
+                println!("Produto encontrado: {:?}", produto);
+            }
+        }
+        None => println!("Produto não encontrado"),
+    }
 
     // Exibe recomendações de produtos com base em um produto específico
     println!("🛒 Recomendações para 'Laptop'...");
@@ -43,7 +47,12 @@ fn main() {
 
     // Exibe os produtos relacionados diretamente no produto buscado
     if let Some(produto) = catalogo.buscar("Laptop").and_then(|p| p.first()) {
-        println!("Produtos relacionados ao '{}': {:?}", produto.nome, produto.relacionados);
+        let relacionados_nomes: Vec<String> = produto
+            .relacionados
+            .iter()
+            .filter_map(|id| grafo.obter_produto(id).map(|p| p.nome.clone()))
+            .collect();
+        println!("Produtos relacionados ao '{}': {:?}", produto.nome, relacionados_nomes);
     } else {
         println!("Produto 'Laptop' não encontrado no catálogo.");
     }
