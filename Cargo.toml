@@ -1,6 +1,7 @@
 [package]
 name = "mega-search-rs"
 version = "0.1.0"
-edition = "2024"
+edition = "2021"
 
 [dependencies]
+# No momento, não há dependências externas, mas você pode adicionar crates mais tarde
